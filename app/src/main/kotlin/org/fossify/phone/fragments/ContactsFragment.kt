@@ -28,7 +28,6 @@ import org.fossify.phone.databinding.FragmentContactsBinding
 import org.fossify.phone.databinding.FragmentLettersLayoutBinding
 import org.fossify.phone.extensions.handleGenericContactClick
 import org.fossify.phone.extensions.launchCreateNewContactIntent
-import org.fossify.phone.extensions.setupWithContacts
 import org.fossify.phone.extensions.startContactDetailsIntent
 import org.fossify.phone.interfaces.RefreshItemsListener
 
@@ -44,6 +43,9 @@ class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPag
     }
 
     override fun setupFragment() {
+        binding.letterFastscroller.beGone()
+        binding.letterFastscrollerThumb.beGone()
+
         val placeholderResId = if (context.hasPermission(PERMISSION_READ_CONTACTS)) {
             R.string.no_contacts_found
         } else {
@@ -76,12 +78,6 @@ class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPag
             (fragmentList.adapter as? MyRecyclerViewAdapter)?.updateTextColor(textColor)
             fragmentPlaceholder.setTextColor(textColor)
             fragmentPlaceholder2.setTextColor(properPrimaryColor)
-
-            letterFastscroller.textColor = textColor.getColorStateList()
-            letterFastscroller.pressedTextColor = properPrimaryColor
-            letterFastscrollerThumb.setupWithFastScroller(letterFastscroller)
-            letterFastscrollerThumb.textColor = properPrimaryColor.getContrastColor()
-            letterFastscrollerThumb.thumbColor = properPrimaryColor.getColorStateList()
         }
     }
 
@@ -107,7 +103,6 @@ class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPag
     }
 
     private fun gotContacts(contacts: ArrayList<Contact>) {
-        setupLetterFastScroller(contacts)
         if (contacts.isEmpty()) {
             binding.apply {
                 fragmentPlaceholder.beVisible()
@@ -146,14 +141,9 @@ class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPag
         }
     }
 
-    private fun setupLetterFastScroller(contacts: ArrayList<Contact>) {
-        binding.letterFastscroller.setupWithContacts(binding.fragmentList, contacts)
-    }
-
     override fun onSearchClosed() {
         binding.fragmentPlaceholder.beVisibleIf(allContacts.isEmpty())
         (binding.fragmentList.adapter as? ContactsAdapter)?.updateItems(allContacts)
-        setupLetterFastScroller(allContacts)
     }
 
     override fun onSearchQueryChanged(text: String) {
@@ -179,7 +169,6 @@ class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPag
 
         binding.fragmentPlaceholder.beVisibleIf(filtered.isEmpty())
         (binding.fragmentList.adapter as? ContactsAdapter)?.updateItems(filtered, fixedText)
-        setupLetterFastScroller(filtered)
     }
 
     private fun requestReadContactsPermission() {
