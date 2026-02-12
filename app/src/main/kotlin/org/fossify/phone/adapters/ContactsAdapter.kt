@@ -366,21 +366,7 @@ class ContactsAdapter(
             itemContactFrame.isSelected = selectedKeys.contains(contact.rawId)
 
             itemContactImage.apply {
-                if (profileIconClick != null && viewType != VIEW_TYPE_GRID) {
-                    setBackgroundResource(R.drawable.selector_clickable_circle)
-
-                    setOnClickListener {
-                        if (!actModeCallback.isSelectable) {
-                            profileIconClick.invoke(contact)
-                        } else {
-                            holder.viewClicked(contact)
-                        }
-                    }
-                    setOnLongClickListener {
-                        holder.viewLongClicked()
-                        true
-                    }
-                }
+                beGone()
             }
 
             itemContactName.apply {
@@ -432,9 +418,6 @@ class ContactsAdapter(
                 }
             }
 
-            if (!activity.isDestroyed) {
-                SimpleContactsHelper(root.context).loadContactImage(contact.photoUri, itemContactImage, contact.getNameToDisplay())
-            }
         }
     }
 
