@@ -11,6 +11,9 @@
     <string name="show_grouped_calls">Сгруппировать вызовы</string>
     <string name="clear_call_history">Очистить историю вызовов</string>
     <string name="show_call_details">Показать сведения о вызове</string>
+    <string name="call_history_more_options">Дополнительные действия</string>
+    <string name="call_history_view_contact">Открыть контакт</string>
+    <string name="call_history_add_to_contacts">Добавить в контакты</string>
     <string name="dialpad">Номеронабиратель</string>
     <string name="asterisk">Звёздочка</string>
     <string name="hashtag">Хэштег</string>

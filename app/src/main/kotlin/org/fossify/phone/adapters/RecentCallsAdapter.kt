@@ -581,6 +581,11 @@ class RecentCallsAdapter(
                 SimpleContactsHelper(root.context).loadContactImage(call.photoUri, itemRecentsImage, call.name)
 
                 itemRecentsImage.apply {
+                    contentDescription = if (matchingContact != null) {
+                        activity.getString(R.string.call_history_view_contact)
+                    } else {
+                        activity.getString(R.string.call_history_add_to_contacts)
+                    }
                     if (profileIconClick != null) {
                         setBackgroundResource(R.drawable.selector_clickable_circle)
 
