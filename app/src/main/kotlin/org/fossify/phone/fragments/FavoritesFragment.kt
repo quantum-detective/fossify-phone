@@ -9,8 +9,6 @@ import org.fossify.commons.extensions.baseConfig
 import org.fossify.commons.extensions.beGone
 import org.fossify.commons.extensions.beVisible
 import org.fossify.commons.extensions.beVisibleIf
-import org.fossify.commons.extensions.getColorStateList
-import org.fossify.commons.extensions.getContrastColor
 import org.fossify.commons.extensions.getMyContactsCursor
 import org.fossify.commons.extensions.hasPermission
 import org.fossify.commons.helpers.ContactsHelper
@@ -29,7 +27,6 @@ import org.fossify.phone.databinding.FragmentFavoritesBinding
 import org.fossify.phone.databinding.FragmentLettersLayoutBinding
 import org.fossify.phone.extensions.config
 import org.fossify.phone.extensions.handleGenericContactClick
-import org.fossify.phone.extensions.setupWithContacts
 import org.fossify.phone.extensions.startContactDetailsIntent
 import org.fossify.phone.interfaces.RefreshItemsListener
 
@@ -53,18 +50,14 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
 
         binding.fragmentPlaceholder.text = context.getString(placeholderResId)
         binding.fragmentPlaceholder2.beGone()
+        binding.letterFastscroller.beGone()
+        binding.letterFastscrollerThumb.beGone()
     }
 
     override fun setupColors(textColor: Int, primaryColor: Int, properPrimaryColor: Int) {
         binding.apply {
             fragmentPlaceholder.setTextColor(textColor)
             (fragmentList.adapter as? MyRecyclerViewAdapter)?.updateTextColor(textColor)
-
-            letterFastscroller.textColor = textColor.getColorStateList()
-            letterFastscroller.pressedTextColor = properPrimaryColor
-            letterFastscrollerThumb.setupWithFastScroller(letterFastscroller)
-            letterFastscrollerThumb.textColor = properPrimaryColor.getContrastColor()
-            letterFastscrollerThumb.thumbColor = properPrimaryColor.getColorStateList()
         }
     }
 
@@ -98,7 +91,6 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
     }
 
     private fun gotContacts(contacts: ArrayList<Contact>) {
-        setupLetterFastScroller(contacts)
         binding.apply {
             if (contacts.isEmpty()) {
                 fragmentPlaceholder.beVisible()
@@ -139,7 +131,6 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
                     if (adapter is ContactsAdapter) {
                         val items = adapter.contacts
                         saveCustomOrderToPrefs(items)
-                        setupLetterFastScroller(items)
                     }
                 }
 
@@ -187,14 +178,9 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
         }
     }
 
-    private fun setupLetterFastScroller(contacts: List<Contact>) {
-        binding.letterFastscroller.setupWithContacts(binding.fragmentList, contacts)
-    }
-
     override fun onSearchClosed() {
         binding.fragmentPlaceholder.beVisibleIf(allContacts.isEmpty())
         (binding.fragmentList.adapter as? ContactsAdapter)?.updateItems(allContacts)
-        setupLetterFastScroller(allContacts)
     }
 
     override fun onSearchQueryChanged(text: String) {
@@ -207,17 +193,14 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
 
         binding.fragmentPlaceholder.beVisibleIf(contacts.isEmpty())
         (binding.fragmentList.adapter as? ContactsAdapter)?.updateItems(contacts, fixedText)
-        setupLetterFastScroller(contacts)
     }
 
     private fun setViewType(viewType: Int) {
         val spanCount = context.config.contactsGridColumnCount
 
         val layoutManager = if (viewType == VIEW_TYPE_GRID) {
-            binding.letterFastscroller.beGone()
             MyGridLayoutManager(context, spanCount)
         } else {
-            binding.letterFastscroller.beVisible()
             MyLinearLayoutManager(context)
         }
         binding.fragmentList.layoutManager = layoutManager
