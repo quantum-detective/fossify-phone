@@ -1,0 +1,14 @@
+---
+description: Do not add inline or redundant comments when generating code
+alwaysApply: true
+---
+
+# No Redundant Comments
+
+When generating or editing code:
+
+- **Do not add inline comments** unless they explain non-obvious behavior, workarounds, or important constraints.
+- **Do not comment straightforward code** (e.g., obvious variable names, simple conditionals, standard patterns). The code should be self-explanatory.
+- Prefer clear naming and structure over comments. If a comment is needed to explain what code does, consider refactoring instead.
+
+Add comments only when they add real value: non-obvious logic, business rules, security/correctness notes, or references to external specs.
