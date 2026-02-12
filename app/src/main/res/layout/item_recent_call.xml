@@ -10,25 +10,11 @@
     android:paddingTop="@dimen/medium_margin"
     android:paddingBottom="@dimen/medium_margin">
 
-    <ImageView
-        android:id="@+id/item_recents_image"
-        android:layout_width="@dimen/normal_icon_size"
-        android:layout_height="@dimen/normal_icon_size"
-        android:contentDescription="@string/call_history_view_contact"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/normal_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:padding="@dimen/small_margin"
-        android:src="@drawable/ic_person_vector"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/item_recents_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginEnd="@dimen/small_margin"
         android:ellipsize="marquee"
         android:focusable="false"
@@ -40,7 +26,7 @@
         android:textSize="@dimen/bigger_text_size"
         app:layout_constraintBottom_toTopOf="@id/item_recents_date_time"
         app:layout_constraintEnd_toStartOf="@+id/overflow_menu_icon"
-        app:layout_constraintStart_toEndOf="@+id/item_recents_image"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
         tools:text="John Doe" />
@@ -56,7 +42,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/item_recents_date_time"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toEndOf="@+id/item_recents_image"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/item_recents_date_time"
         tools:visibility="visible" />
 

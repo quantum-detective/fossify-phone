@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.bumptech.glide.Glide
 import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import com.google.i18n.phonenumbers.Phonenumber
@@ -43,7 +42,6 @@ import org.fossify.commons.extensions.isOrWasThankYouInstalled
 import org.fossify.commons.extensions.launchSendSMSIntent
 import org.fossify.commons.extensions.setupViewBackground
 import org.fossify.commons.helpers.PERMISSION_WRITE_CALL_LOG
-import org.fossify.commons.helpers.SimpleContactsHelper
 import org.fossify.commons.helpers.ensureBackgroundThread
 import org.fossify.commons.helpers.isNougatPlus
 import org.fossify.commons.models.contacts.Contact
@@ -189,11 +187,6 @@ class RecentCallsAdapter(
 
     override fun onViewRecycled(holder: ViewHolder) {
         super.onViewRecycled(holder)
-        if (!activity.isDestroyed && !activity.isFinishing) {
-            if (holder is RecentCallViewHolder) {
-                Glide.with(activity).clear(holder.binding.itemRecentsImage)
-            }
-        }
     }
 
     override fun submitList(list: List<CallLogItem>?) {
@@ -576,31 +569,6 @@ class RecentCallsAdapter(
                     itemRecentsSimImage.applyColorFilter(simColor)
                     itemRecentsSimId.setTextColor(simColor.getContrastColor())
                     itemRecentsSimId.text = call.simID.toString()
-                }
-
-                SimpleContactsHelper(root.context).loadContactImage(call.photoUri, itemRecentsImage, call.name)
-
-                itemRecentsImage.apply {
-                    contentDescription = if (matchingContact != null) {
-                        activity.getString(R.string.call_history_view_contact)
-                    } else {
-                        activity.getString(R.string.call_history_add_to_contacts)
-                    }
-                    if (profileIconClick != null) {
-                        setBackgroundResource(R.drawable.selector_clickable_circle)
-
-                        setOnClickListener {
-                            if (!actModeCallback.isSelectable) {
-                                profileIconClick.invoke(call)
-                            } else {
-                                viewClicked(call)
-                            }
-                        }
-                        setOnLongClickListener {
-                            viewLongClicked()
-                            true
-                        }
-                    }
                 }
 
                 val drawable = when (call.type) {
