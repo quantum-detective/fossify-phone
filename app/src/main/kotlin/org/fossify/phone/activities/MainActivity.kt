@@ -203,6 +203,7 @@ class MainActivity : SimpleActivity() {
             findItem(R.id.change_view_type).isVisible = currentFragment == getFavoritesFragment()
             findItem(R.id.column_count).isVisible = currentFragment == getFavoritesFragment() && config.viewType == VIEW_TYPE_GRID
             findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
+            findItem(R.id.about).isVisible = false
         }
     }
 
