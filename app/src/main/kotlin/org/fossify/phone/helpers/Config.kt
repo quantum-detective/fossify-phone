@@ -113,7 +113,7 @@ class Config(context: Context) : BaseConfig(context) {
         set(disableProximitySensor) = prefs.edit().putBoolean(DISABLE_PROXIMITY_SENSOR, disableProximitySensor).apply()
 
     var disableSwipeToAnswer: Boolean
-        get() = prefs.getBoolean(DISABLE_SWIPE_TO_ANSWER, false)
+        get() = prefs.getBoolean(DISABLE_SWIPE_TO_ANSWER, true)
         set(disableSwipeToAnswer) = prefs.edit().putBoolean(DISABLE_SWIPE_TO_ANSWER, disableSwipeToAnswer).apply()
 
     var wasOverlaySnackbarConfirmed: Boolean
