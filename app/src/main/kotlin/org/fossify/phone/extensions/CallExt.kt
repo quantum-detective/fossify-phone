@@ -7,7 +7,7 @@ import android.telecom.PhoneAccountHandle
 import android.telecom.TelecomManager
 import org.fossify.commons.R
 import org.fossify.commons.activities.BaseSimpleActivity
-import org.fossify.commons.dialogs.CallConfirmationDialog
+import org.fossify.phone.dialogs.CallConfirmationDialog
 import org.fossify.commons.dialogs.PermissionRequiredDialog
 import org.fossify.commons.extensions.canUseFullScreenIntent
 import org.fossify.commons.extensions.initiateCall

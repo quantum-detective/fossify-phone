@@ -18,6 +18,8 @@
     <string name="asterisk">Звёздочка</string>
     <string name="hashtag">Хэштег</string>
     <string name="call_number">Номер вызова</string>
+    <string name="call_button">Позвонить</string>
+    <string name="call_confirmation_message">Позвонить %s?</string>
     <string name="dialpad_beeps">Звуковые сигналы при нажатии кнопок набора номера</string>
     <string name="dialpad_vibrations">Вибрация при нажатии кнопок набора номера</string>
     <string name="dialer">Телефон</string>

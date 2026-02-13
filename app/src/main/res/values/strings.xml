@@ -25,6 +25,8 @@
     <string name="asterisk">Asterisk</string>
     <string name="hashtag">Hashtag</string>
     <string name="call_number">Call number</string>
+    <string name="call_button">Call</string>
+    <string name="call_confirmation_message">Call %s?</string>
     <string name="dialpad_beeps">Enable beeps on dialpad button clicks</string>
     <string name="dialpad_vibrations">Enable vibrations on dialpad button clicks</string>
 
